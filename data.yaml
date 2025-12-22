@@ -1,6 +1,6 @@
-path: /Users/alireza/Documents/GitHub/QuadAndFix-Wing-Detection/both
-train: train
-val: valid
+path: /Users/abdulsalamhijazikelani/Computer/University/MC Computer Engineering/Aplied NN/midterm-project/Unmanned-Aerial-Vehicle/drone_dataset_yolo
+train: dataset_txt
+val: dataset_txt
 
 names:
   0: drone

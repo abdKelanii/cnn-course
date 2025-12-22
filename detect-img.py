@@ -9,11 +9,14 @@ model = YOLO('51ep-16-GPU.pt')
 count = 0
 
 for item in os.listdir("test-img"):
+    # Skip non-image files
+    if not item.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.tiff')):
+        continue
     
-    img = cv.imread("test/"+item)
+    img = cv.imread("test-img/"+item)
     
-    if len(np.shape(img)) == 0:
-        
+    if img is None or len(np.shape(img)) == 0:
+        print(f"Skipping {item} - could not read image")
         continue
 
     print("Image -------",item)
