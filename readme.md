@@ -1,61 +1,323 @@
 # Unmanned Aerial Vehicle (UAV) Detection
 
-This repository contains a YOLOv8-based model for detecting both regular drones (multirotors) and fixed-wing drones in images.
-<div  align="center">
+A deep learning-based object detection system for identifying and classifying drones in images and video streams using YOLOv8.
+
+<div align="center">
 <h3 align='center'>Fixed-wing UAV</h3>
-  <img src="https://i.postimg.cc/Jh9WWfV3/fix-wing-drone-2.jpg" alt="Image 3" style="display:inline-block; height: auto;">
+  <img src="https://i.postimg.cc/Jh9WWfV3/fix-wing-drone-2.jpg" alt="Fixed-wing drone" style="display:inline-block; height: auto;">
 </div>
 
-<div align="center"style="display: flex !important;flex-direction: row;flex-wrap: nowrap;align-content: stretch;justify-content: space-evenly;align-items: center;"><h3 align='center'>Drones (multirotors)</h3> <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmVmdHNoam1oaGY3Yjl6anY4amU5YzZpdDFiMWdtY3JvcWkzemdrayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YFt1vuUWIUEK20032A/giphy.gif" alt="Image 1" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
-  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmttc25lZzI1NTZjemlsbXkybWNhZzdidGZnaDBxazd1bGN0M3B0diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F0s1DhmP8kjRyceiZn/giphy.gif" alt="Image 2" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
-  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXhzaWxvZjJpcXZibG1mYW82b3RvaGczeXpnOWwxcnFzMzJjcHl2MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZexM3mTNT6wgeme0tw/giphy.gif" alt="Image 3" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
+<div align="center" style="display: flex !important;flex-direction: row;flex-wrap: nowrap;align-content: stretch;justify-content: space-evenly;align-items: center;">
+<h3 align='center'>Drones (multirotors)</h3> 
+<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmVmdHNoam1oaGY3Yjl6anY4amU5YzZpdDFiMWdtY3JvcWkzemdrayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YFt1vuUWIUEK20032A/giphy.gif" alt="Drone 1" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
+  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmttc25lZzI1NTZjemlsbXkybWNhZzdidGZnaDBxazd1bGN0M3B0diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/F0s1DhmP8kjRyceiZn/giphy.gif" alt="Drone 2" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXhzaWxvZjJpcXZibG1mYW82b3RvaGczeXpnOWwxcnFzMzJjcHl2MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ZexM3mTNT6wgeme0tw/giphy.gif" alt="Drone 3" style="display:inline-block; margin: 10px; width: 40% !important; height: auto;">
 </div>
 
-## Overview
+## 📋 Table of Contents
 
-This project aims to provide a robust solution for detecting UAVs (Unmanned Aerial Vehicles), commonly known as drones, in visual data. The model is trained using the YOLOv8 object detection framework, known for its speed and accuracy. This repository includes the trained model weights, example usage scripts, and documentation to help you get started with UAV detection.
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Training](#training)
+  - [Image Detection](#image-detection)
+  - [Video Detection](#video-detection)
+- [Dataset](#dataset)
+- [Model Architecture](#model-architecture)
+- [Results](#results)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Performance Metrics](#performance-metrics)
+- [Future Improvements](#future-improvements)
 
-## Requirements Installation
+## 🎯 Overview
 
+This project implements a YOLOv8-based object detection system specifically designed to detect and classify Unmanned Aerial Vehicles (UAVs) in visual data. The model can identify two types of drones:
+
+1. **Multirotor drones** - Traditional quadcopters and multirotor UAVs
+2. **Fixed-wing drones** - Fixed-wing aircraft-style UAVs
+
+The system is capable of processing both static images and video streams in real-time, making it suitable for various applications including security, surveillance, and airspace management.
+
+## ✨ Features
+
+- 🚁 **Dual-class detection**: Identifies both multirotor and fixed-wing drones
+- 🖼️ **Image processing**: Batch processing of images with detection visualization
+- ⚡ **Optimized training**: Mixed precision training with GPU acceleration
+- 🔄 **Checkpoint management**: Automatic checkpoint saving and resumption
+- 📊 **Comprehensive evaluation**: Detailed metrics and visualization tools
+
+## 📦 Installation
+
+### Prerequisites
+
+- Python 3.8 or higher
+- CUDA-capable GPU (optional, for faster training) or Apple Silicon (MPS support)
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd Unmanned-Aerial-Vehicle
+```
+
+2. Install required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-## Results and Discussion
-This section presents a comprehensive evaluation of the drone detection model's performance. The model was trained five times, with each training run consisting of 10 epochs.
-- Results are provided for both the training and testing datasets.
 
-[![Alt text](https://i.postimg.cc/nhf8sW-8w/results.png)](https://github.com/Alireza0K)
+### Dependencies
 
-## Dataset
+- `ultralytics==8.3.51` - YOLOv8 framework
+- `opencv-python==4.10.0.82` - Image and video processing
+- `numpy==1.25.2` - Numerical computations
+- `torch` - PyTorch backend (automatically installed with ultralytics)
 
-*The training dataset contains 3,000 ***Drone*** images, evenly distributed between multirotor and ***fixed-wing*** types.*
+## 🚀 Usage
 
-*   **Description:** The dataset consists of images collected from various sources, including online datasets and custom captures. It contains images of both multirotor and fixed-wing drones in different environments and lighting conditions.
-*   **Size:** The training set contains 1000 images, the validation set contains 200 images, and the test set contains 300 images.
-*   **Classes:** The model is trained to detect two classes: 'drone' and 'fixed-wing'."
+### Training
 
-    Example:
-    ```
-    path: direct/project/path
-    train: train
-    val: valid
-
-    names:
-    0: drone
-    1: Fix-wing-drone
-    ```
-
-## Model Training
-
-The model was trained using YOLOv8 with the following parameters:
-
-*   **Model Architecture:** YOLOv8n, YOLOv8s, YOLOv8m 
-*   **Epochs:** 51
-*   **Batch Size:** 16
-*   **Image Size:** 640x640
-*   **Device:** GPU (MPS for Apple Silicon or CUDA for NVIDIA, if used) or CPU (I used MPS)
-
-## Training command:
+To train the model on your dataset:
 
 ```bash
 python3 main.py
+```
+
+The training script will:
+- Automatically detect available device (MPS for Apple Silicon, CUDA for NVIDIA, or CPU)
+- Resume from the latest checkpoint if available
+- Train for 51 epochs with optimized settings
+- Save checkpoints automatically in `runs/detect/train*/weights/`
+
+**Training Configuration:**
+- **Epochs**: 51
+- **Batch Size**: 32
+- **Image Size**: 640×640
+- **Mixed Precision**: Enabled (AMP)
+- **Data Caching**: Enabled
+- **Workers**: 8 parallel data loaders
+
+### Image Detection
+
+To detect drones in images:
+
+```bash
+python3 detect-img.py
+```
+
+This script will:
+- Load the trained model (`51ep-16-GPU.pt`)
+- Process all images in the `test-img/` directory
+- Display annotated results with bounding boxes and confidence scores
+- Support formats: PNG, JPG, JPEG, BMP, TIFF
+
+**Note**: Press any key to proceed to the next image.
+
+### Video Detection
+
+To detect drones in video files:
+
+```bash
+python3 detect-cam.py
+```
+
+This script will:
+- Load the trained model
+- Process video files from the `test-video/` directory
+- Display real-time detection results
+- Save annotated output video
+- Press 'q' to quit
+
+## 📊 Dataset
+
+### Dataset Information
+
+- **Total Images**: ~1,360 annotated images
+- **Classes**: 2 (drone, Fix-wing-drone)
+- **Format**: YOLO format (images with corresponding `.txt` annotation files)
+- **Distribution**: Balanced representation of both drone types
+
+### Dataset Structure
+
+```
+drone_dataset_yolo/
+└── dataset_txt/
+    ├── *.jpg          # Image files
+    ├── *.txt          # Annotation files (YOLO format)
+    └── classes.txt    # Class names
+```
+
+### Annotation Format
+
+Each annotation file contains bounding boxes in YOLO format:
+```
+class_id center_x center_y width height
+```
+
+All coordinates are normalized to [0, 1] range.
+
+### Data Configuration
+
+The dataset configuration is specified in `data.yaml`:
+
+```yaml
+path: /path/to/drone_dataset_yolo
+train: dataset_txt
+val: dataset_txt
+
+names:
+  0: drone
+  1: Fix-wing-drone
+```
+
+## 🏗️ Model Architecture
+
+### YOLOv8n
+
+The project uses **YOLOv8n** (nano variant), which provides an optimal balance between:
+- Model size
+- Inference speed
+- Detection accuracy
+
+**Key Features:**
+- CSPDarknet53-based backbone
+- Path Aggregation Network (PAN) for feature fusion
+- Decoupled detection head
+- Anchor-free detection
+
+## 📈 Results
+
+### Training Metrics
+
+The model was trained for 51 epochs with the following final performance:
+
+| Metric | Value |
+|--------|-------|
+| **Precision** | 89.4% |
+| **Recall** | 17.3% |
+| **mAP50** | 30.0% |
+| **mAP50-95** | 23.5% |
+
+### Loss Progression
+
+- **Box Loss**: 1.48 → 0.94 (36% reduction)
+- **Classification Loss**: 1.33 → 0.53 (60% reduction)
+- **DFL Loss**: 1.80 → 1.36 (24% reduction)
+
+### Model Weights
+
+- **Best Model**: `runs/detect/train5/weights/best.pt`
+- **Last Checkpoint**: `runs/detect/train5/weights/last.pt`
+- **Deployed Model**: `51ep-16-GPU.pt`
+
+### Training Visualizations
+
+Training results and visualizations are available in `runs/detect/train5/`:
+- Confusion matrices
+- Precision-Recall curves
+- F1-score curves
+- Training batch samples
+- Validation predictions
+
+## 📁 Project Structure
+
+```
+Unmanned-Aerial-Vehicle/
+├── main.py                    # Training script
+├── detect-img.py              # Image detection script
+├── detect-cam.py              # Video detection script
+├── data.yaml                  # Dataset configuration
+├── requirements.txt           # Python dependencies
+├── 51ep-16-GPU.pt            # Trained model weights
+├── README.md                  # This file
+│
+├── drone_dataset_yolo/        # Dataset directory
+│   └── dataset_txt/           # Images and annotations
+│       ├── *.jpg
+│       ├── *.txt
+│       └── classes.txt
+│
+├── test-img/                  # Test images directory
+│   └── *.png
+│
+├── test-video/                # Test videos directory
+│   └── *.mp4
+│
+└── runs/                      # Training outputs
+    └── detect/
+        ├── train/             # Training run 1
+        ├── train2/            # Training run 2
+        ├── train3/            # Training run 3
+        ├── train4/            # Training run 4
+        └── train5/            # Final training run
+            ├── weights/
+            │   ├── best.pt
+            │   └── last.pt
+            ├── results.csv
+            ├── confusion_matrix.png
+            ├── PR_curve.png
+            └── ...
+```
+
+## 🔧 Requirements
+
+### Hardware
+
+- **Minimum**: CPU-only (slower training)
+- **Recommended**: 
+  - NVIDIA GPU with CUDA support, or
+  - Apple Silicon Mac with MPS support
+
+### Software
+
+- Python 3.8+
+- PyTorch (automatically installed with ultralytics)
+- CUDA toolkit (for NVIDIA GPUs, optional)
+- macOS 12.3+ (for MPS support on Apple Silicon)
+
+## 📊 Performance Metrics
+
+### Model Performance Analysis
+
+**Strengths:**
+- ✅ High precision (89.4%) - minimal false positives
+- ✅ Stable training convergence
+- ✅ Efficient inference speed
+
+**Areas for Improvement:**
+- 📈 Recall can be improved (currently 17.3%)
+- 📈 mAP scores have room for enhancement
+- 📈 Better handling of small objects
+
+### Training Time
+
+- **Total Training Time**: ~6.6 hours (23,865 seconds) for 51 epochs
+- **Average Time per Epoch**: ~468 seconds (~7.8 minutes)
+
+
+## 📝 License
+
+This project is developed for educational purposes as part of the Applied Neural Networks course.
+
+## 👥 Authors
+
+- Abdalsalam Hijazi Kelani
+- Course: Applied Neural Networks
+- Institution: Biruni University
+
+## 🙏 Acknowledgments
+
+- Ultralytics for the YOLOv8 framework
+- Contributors to the open-source drone detection datasets
+- PyTorch and OpenCV communities
+
+## 📧 Contact
+
+For questions or issues, please open an issue in the repository.
+
+---
+
+**Last Updated**: December 2024
+
