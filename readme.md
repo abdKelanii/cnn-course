@@ -73,7 +73,7 @@ pip install -r requirements.txt
 ### Dependencies
 
 - `ultralytics==8.3.51` - YOLOv8 framework
-- `opencv-python==4.10.0.82` - Image and video processing
+- `opencv-python-headless` - Image processing (server / cloud compatible)
 - `numpy==1.25.2` - Numerical computations
 - `torch` - PyTorch backend (automatically installed with ultralytics)
 - `streamlit` - Web app UI
