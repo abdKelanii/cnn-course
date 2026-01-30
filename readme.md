@@ -58,12 +58,14 @@ The system is capable of processing both static images and video streams in real
 ### Setup
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd Unmanned-Aerial-Vehicle
 ```
 
 2. Install required dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -74,6 +76,8 @@ pip install -r requirements.txt
 - `opencv-python==4.10.0.82` - Image and video processing
 - `numpy==1.25.2` - Numerical computations
 - `torch` - PyTorch backend (automatically installed with ultralytics)
+- `streamlit` - Web app UI
+- `pillow` - Image loading for web app
 
 ## 🚀 Usage
 
@@ -86,12 +90,14 @@ python3 main.py
 ```
 
 The training script will:
+
 - Automatically detect available device (MPS for Apple Silicon, CUDA for NVIDIA, or CPU)
 - Resume from the latest checkpoint if available
 - Train for 51 epochs with optimized settings
 - Save checkpoints automatically in `runs/detect/train*/weights/`
 
 **Training Configuration:**
+
 - **Epochs**: 51
 - **Batch Size**: 32
 - **Image Size**: 640×640
@@ -108,12 +114,28 @@ python3 detect-img.py
 ```
 
 This script will:
+
 - Load the trained model (`51ep-16-GPU.pt`)
 - Process all images in the `test-img/` directory
 - Display annotated results with bounding boxes and confidence scores
 - Support formats: PNG, JPG, JPEG, BMP, TIFF
 
 **Note**: Press any key to proceed to the next image.
+
+### Web App (Streamlit)
+
+To run the web app for image upload and counting:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+The app will:
+
+- Load the trained model (`51ep-16-GPU.pt`)
+- Allow uploading one or more images
+- Display annotated results
+- Show per-image and overall counts for each drone class
 
 ### Video Detection
 
@@ -124,6 +146,7 @@ python3 detect-cam.py
 ```
 
 This script will:
+
 - Load the trained model
 - Process video files from the `test-video/` directory
 - Display real-time detection results
@@ -131,6 +154,8 @@ This script will:
 - Press 'q' to quit
 
 ## 📊 Dataset
+
+The dataset used in this project consists of approximately 1,360 carefully annotated images of Unmanned Aerial Vehicles (UAVs), collected from diverse sources including online repositories and custom captures. The dataset encompasses two distinct classes of drones: multirotor drones (traditional quadcopters and multirotor UAVs) and fixed-wing drones (aircraft-style UAVs). Each image has been meticulously annotated in YOLO format with bounding box coordinates, ensuring precise localization of the target objects. The images represent a wide variety of real-world scenarios, including different lighting conditions (daylight, dusk, and various weather conditions), diverse backgrounds (urban, rural, and aerial views), multiple viewing angles, and varying scales. This diversity is crucial for training a robust detection model that can generalize well to unseen environments. The dataset maintains a balanced distribution between the two classes, preventing class imbalance issues during training. All annotations follow the YOLO format standard, where bounding box coordinates are normalized to values between 0 and 1, facilitating consistent training across different image resolutions. The dataset structure is organized to support efficient data loading during training, with images and their corresponding annotation files stored in a unified directory structure that the YOLOv8 framework can directly process.
 
 ### Dataset Information
 
@@ -152,6 +177,7 @@ drone_dataset_yolo/
 ### Annotation Format
 
 Each annotation file contains bounding boxes in YOLO format:
+
 ```
 class_id center_x center_y width height
 ```
@@ -177,11 +203,13 @@ names:
 ### YOLOv8n
 
 The project uses **YOLOv8n** (nano variant), which provides an optimal balance between:
+
 - Model size
 - Inference speed
 - Detection accuracy
 
 **Key Features:**
+
 - CSPDarknet53-based backbone
 - Path Aggregation Network (PAN) for feature fusion
 - Decoupled detection head
@@ -193,12 +221,12 @@ The project uses **YOLOv8n** (nano variant), which provides an optimal balance b
 
 The model was trained for 51 epochs with the following final performance:
 
-| Metric | Value |
-|--------|-------|
+| Metric        | Value |
+| ------------- | ----- |
 | **Precision** | 89.4% |
-| **Recall** | 17.3% |
-| **mAP50** | 30.0% |
-| **mAP50-95** | 23.5% |
+| **Recall**    | 17.3% |
+| **mAP50**     | 30.0% |
+| **mAP50-95**  | 23.5% |
 
 ### Loss Progression
 
@@ -215,6 +243,7 @@ The model was trained for 51 epochs with the following final performance:
 ### Training Visualizations
 
 Training results and visualizations are available in `runs/detect/train5/`:
+
 - Confusion matrices
 - Precision-Recall curves
 - F1-score curves
@@ -266,7 +295,7 @@ Unmanned-Aerial-Vehicle/
 ### Hardware
 
 - **Minimum**: CPU-only (slower training)
-- **Recommended**: 
+- **Recommended**:
   - NVIDIA GPU with CUDA support, or
   - Apple Silicon Mac with MPS support
 
@@ -282,11 +311,13 @@ Unmanned-Aerial-Vehicle/
 ### Model Performance Analysis
 
 **Strengths:**
+
 - ✅ High precision (89.4%) - minimal false positives
 - ✅ Stable training convergence
 - ✅ Efficient inference speed
 
 **Areas for Improvement:**
+
 - 📈 Recall can be improved (currently 17.3%)
 - 📈 mAP scores have room for enhancement
 - 📈 Better handling of small objects
@@ -295,7 +326,6 @@ Unmanned-Aerial-Vehicle/
 
 - **Total Training Time**: ~6.6 hours (23,865 seconds) for 51 epochs
 - **Average Time per Epoch**: ~468 seconds (~7.8 minutes)
-
 
 ## 📝 License
 
@@ -320,4 +350,3 @@ For questions or issues, please open an issue in the repository.
 ---
 
 **Last Updated**: December 2024
-
