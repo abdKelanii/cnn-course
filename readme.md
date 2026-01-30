@@ -334,7 +334,8 @@ This project is developed for educational purposes as part of the Applied Neural
 ## 👥 Authors
 
 - Abdalsalam Hijazi Kelani
-- Course: Applied Neural Networks
+- Bilal Abdulhadi
+- Ghaıth Almadanı 
 - Institution: Biruni University
 
 ## 🙏 Acknowledgments
